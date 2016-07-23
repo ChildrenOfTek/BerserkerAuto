@@ -14,4 +14,12 @@ class DefaultController extends Controller
     {
         return $this->render('UserBundle:Default:index.html.twig');
     }
+    
+    /**
+     * @Route("/index/index")
+     */
+    public function indexIndexAction()
+    {
+        return $this->render('UserBundle:Default:index.index.html.twig');
+    }
 }
