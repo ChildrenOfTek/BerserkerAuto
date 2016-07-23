@@ -10,6 +10,9 @@ use UserBundle\Entity\User;
 use UserBundle\Entity\Role;
 use UserBundle\Form\UserType;
 
+# il nous faut ce namespace pour la gestion du cryptage du mot de passe
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
+
 /**
  * User controller.
  *
@@ -51,13 +54,22 @@ class UserController extends Controller
         $user = new User();
         $form = $this->createForm('UserBundle\Form\UserType', $user);
         $form->handleRequest($request);
-        $user->addUserRole($role);
-        //var_dump($user);die();
+
+        //var_dump($user->getUserRoles());die();
        //var_dump($form->getData()->getRoles());die();
         if ($form->isSubmitted() && $form->isValid()) {
+            $data=$form->getData();
+            $user->setSalt(md5(time()));
+
+            // On crée un mot de passe (attention, comme vous pouvez le voir, il faut utiliser les même paramètres
+            // que spécifiés dans le fichier security.yml, à savoir SHA512 avec 10 itérations.
+            $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+            // On crée donc le mot de passe "admin" à partir de l'encodage choisi au-dessus
+            $password = $encoder->encodePassword($data->getPassword(), $user->getSalt());
+            // On applique le mot de passe à l'utilisateur
+            $user->setPassword($password);
             
-                $user->addUserRole($role);
-               
+            $user->addUserRole($role);
             $em->persist($user);
             $em->flush();
 

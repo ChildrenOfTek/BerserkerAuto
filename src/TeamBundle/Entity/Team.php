@@ -54,13 +54,22 @@ class Team
      *
      * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="team")
      */
-    private $user;
+    private $users;
 
+
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer 
      */
     public function getId()
     {
@@ -71,7 +80,6 @@ class Team
      * Set nom
      *
      * @param string $nom
-     *
      * @return Team
      */
     public function setNom($nom)
@@ -84,7 +92,7 @@ class Team
     /**
      * Get nom
      *
-     * @return string
+     * @return string 
      */
     public function getNom()
     {
@@ -95,7 +103,6 @@ class Team
      * Set tag
      *
      * @param string $tag
-     *
      * @return Team
      */
     public function setTag($tag)
@@ -108,7 +115,7 @@ class Team
     /**
      * Get tag
      *
-     * @return string
+     * @return string 
      */
     public function getTag()
     {
@@ -119,7 +126,6 @@ class Team
      * Set victoires
      *
      * @param integer $victoires
-     *
      * @return Team
      */
     public function setVictoires($victoires)
@@ -132,7 +138,7 @@ class Team
     /**
      * Get victoires
      *
-     * @return int
+     * @return integer 
      */
     public function getVictoires()
     {
@@ -143,7 +149,6 @@ class Team
      * Set defaites
      *
      * @param integer $defaites
-     *
      * @return Team
      */
     public function setDefaites($defaites)
@@ -156,84 +161,43 @@ class Team
     /**
      * Get defaites
      *
-     * @return int
+     * @return integer 
      */
     public function getDefaites()
     {
         return $this->defaites;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add member
+     * Add users
      *
-     * @param \MemberBundle\Entity\Member $member
-     *
+     * @param \UserBundle\Entity\User $users
      * @return Team
      */
-    public function addMember(\MemberBundle\Entity\Member $member)
+    public function addUser(\UserBundle\Entity\User $users)
     {
-        $this->members[] = $member;
+        $this->users[] = $users;
 
         return $this;
     }
 
     /**
-     * Remove member
+     * Remove users
      *
-     * @param \MemberBundle\Entity\Member $member
+     * @param \UserBundle\Entity\User $users
      */
-    public function removeMember(\MemberBundle\Entity\Member $member)
+    public function removeUser(\UserBundle\Entity\User $users)
     {
-        $this->members->removeElement($member);
+        $this->users->removeElement($users);
     }
 
     /**
-     * Get members
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMembers()
-    {
-        return $this->members;
-    }
-
-    /**
-     * Add user
-     *
-     * @param \UserBundle\Entity\User $user
-     * @return Team
-     */
-    public function addUser(\UserBundle\Entity\User $user)
-    {
-        $this->user[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param \UserBundle\Entity\User $user
-     */
-    public function removeUser(\UserBundle\Entity\User $user)
-    {
-        $this->user->removeElement($user);
-    }
-
-    /**
-     * Get user
+     * Get users
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getUser()
+    public function getUsers()
     {
-        return $this->user;
+        return $this->users;
     }
 }

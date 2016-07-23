@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
  * 
- * @UniqueEntity(fields="username", message="Username already taken")
+ * @UniqueEntity(fields="login", message="Pseudonyme deja pris")
  */
 class User implements UserInterface, \Serializable
 {
@@ -42,12 +42,10 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\ManyToMany(targetEntity="Role")
-     * @ORM\JoinTable(name="_assoc_user_role",
+     * @ORM\JoinTable(name="user_role",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
-     * )
-     *
-     * 
+     *)
      */
     protected $userRoles;
     /**
@@ -102,7 +100,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->userRoles=[];
+        
         $this->updatedAt = new \DateTime();
     }
 
