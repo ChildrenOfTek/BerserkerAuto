@@ -1,3 +1,25 @@
-app:
-    resource: "@AppBundle/Controller/"
+article:
+    resource: "@ArticleBundle/Controller/"
     type:     annotation
+    prefix:   /
+
+forum:
+    resource: "@ForumBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+war:
+    resource: "@WarBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+team:
+    resource: "@TeamBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
