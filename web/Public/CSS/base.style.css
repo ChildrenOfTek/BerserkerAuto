@@ -1,0 +1,46 @@
+/* 
+    Created on : 20 juil. 2016, 18:33:24
+    Author     : Children
+*/
+
+body
+{
+    display:flex;
+    flex-flow:column nowrap;
+    
+}
+.tableau
+{
+   border:2px solid black;
+   border-collapse: collapse;
+}
+.tableau td,th
+{
+    border:2px solid black;
+}
+#logo
+{
+    min-width:100vw;
+    text-align:center;
+}
+#main
+{
+    display:flex;
+    flex-direction:row;
+}
+
+#nav
+{
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    flex: 0 1 auto;
+    border:1px solid black;
+    width:200px;
+    
+}
+#section
+{
+    margin-left:50px;
+}
+

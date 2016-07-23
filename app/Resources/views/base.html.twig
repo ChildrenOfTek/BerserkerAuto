@@ -2,12 +2,41 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>
+            {% block title %}
+                Bienvenue chez les Berserkers
+            {% endblock %}
+        </title>
+        <link href="{{ asset('Public/CSS/base.style.css') }}" rel="stylesheet" type="text/css"/>
+        {% block stylesheets %}
+        
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+        
+            <div id="logo">
+                <img src='{{ asset('Public/img/logo/logo.jpg') }}'/>
+            </div>
+            <div id='main'>
+            <div id="nav">
+                <a href="{{path('user_index')}}">Membres</a>
+                <a href="{{path('user_index')}}">Equipes</a>
+                <a href="{{path('user_index')}}">Wars</a>
+                <a href="{{path('user_index')}}">Forum</a>
+            </div>
+            <div id="section">
+            {% block section %}
+            {% endblock %}
+            </div>
+            </div>
+            
+            
+        {% endblock %}
+        
+        {% block javascripts %}
+        
+        {% endblock %}
     </body>
 </html>
