@@ -42,6 +42,7 @@ class UserController extends Controller
      */
     public function newAction(Request $request)
     {
+        
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository("UserBundle:Role");
         $role= new Role();
@@ -50,10 +51,13 @@ class UserController extends Controller
         $user = new User();
         $form = $this->createForm('UserBundle\Form\UserType', $user);
         $form->handleRequest($request);
-       
+        $user->addUserRole($role);
+        //var_dump($user);die();
+       //var_dump($form->getData()->getRoles());die();
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $user->setRoles(array($role));
+            
+                $user->addUserRole($role);
+               
             $em->persist($user);
             $em->flush();
 

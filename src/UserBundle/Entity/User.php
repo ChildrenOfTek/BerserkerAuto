@@ -3,11 +3,14 @@
 namespace UserBundle\Entity;
 
 use \Symfony\Component\Security\Core\User\UserInterface;
-use \Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
+ * 
+ * @UniqueEntity(fields="username", message="Username already taken")
  */
 class User implements UserInterface, \Serializable
 {
@@ -20,6 +23,8 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * 
      */
     protected $login;
 
@@ -42,7 +47,7 @@ class User implements UserInterface, \Serializable
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
      * )
      *
-     * @var ArrayCollection $userRoles
+     * 
      */
     protected $userRoles;
     /**
@@ -97,7 +102,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->userRoles = new ArrayCollection();
+        $this->userRoles=[];
         $this->updatedAt = new \DateTime();
     }
 
@@ -108,13 +113,13 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return $this->getUserRoles()->toArray();
+        return array('ROLE_USER');
     }
 
     /**
      * Gets the user roles.
      *
-     * @return ArrayCollection A Doctrine ArrayCollection
+     * 
      */
     public function getUserRoles()
     {
