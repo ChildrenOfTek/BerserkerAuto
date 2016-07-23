@@ -7,7 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use UserBundle\Entity\User;
+use UserBundle\Entity\Role;
 use UserBundle\Form\UserType;
+
+# il nous faut ce namespace pour la gestion du cryptage du mot de passe
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 /**
  * User controller.
@@ -46,9 +50,9 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $em = $this->getDoctrine()->getManager();     
+        $em->persist($user);
+        $em->flush();
 
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }

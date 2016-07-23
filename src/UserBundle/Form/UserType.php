@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use TeamBundle\Entity\Team;
 use UserBundle\Entity\Role;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class UserType extends AbstractType
 {
@@ -19,11 +20,11 @@ class UserType extends AbstractType
     {
         $builder
             ->add('login','text',array('label'=>'Nom d\'utilisateur'))
-            ->add('password','text',array('label'=>'Mot de passe'))
+            ->add('password','password',array('label'=>'Mot de passe'))
             ->add('salt','hidden')
             ->add('nom')
             ->add('prenom')
-            ->add('birthDate', 'birthday',array('format'=>'dd-MM-yyyy'))
+            ->add('birthDate', 'birthday',array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
             ->add('userRoles',EntityType::class,array('class'=>'UserBundle:Role','property'=>'name'))
             ->add('team',EntityType::class,array('class'=>'TeamBundle:Team','property'=>'nom'))
         ;
