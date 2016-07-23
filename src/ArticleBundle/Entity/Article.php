@@ -24,7 +24,7 @@ class Article
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="MemberBundle\Entity\User", inversedBy="article")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="article")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id") 
      */
     private $user;

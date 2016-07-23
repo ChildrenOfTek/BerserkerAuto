@@ -52,9 +52,9 @@ class Team
     /**
      * @var int
      *
-     * @ORM\OneToMany(targetEntity="MemberBundle\Entity\Member", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="team")
      */
-    private $members;
+    private $user;
 
 
     /**
@@ -162,5 +162,45 @@ class Team
     {
         return $this->defaites;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add member
+     *
+     * @param \MemberBundle\Entity\Member $member
+     *
+     * @return Team
+     */
+    public function addMember(\MemberBundle\Entity\Member $member)
+    {
+        $this->members[] = $member;
+
+        return $this;
+    }
+
+    /**
+     * Remove member
+     *
+     * @param \MemberBundle\Entity\Member $member
+     */
+    public function removeMember(\MemberBundle\Entity\Member $member)
+    {
+        $this->members->removeElement($member);
+    }
+
+    /**
+     * Get members
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMembers()
+    {
+        return $this->members;
+    }
+}

@@ -27,7 +27,7 @@ class Post
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="MemberBundle\Entity\User", inversedBy="post")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="post")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id") 
      */
     private $user;

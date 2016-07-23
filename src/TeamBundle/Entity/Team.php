@@ -52,7 +52,7 @@ class Team
     /**
      * @var int
      *
-     * @ORM\OneToMany(targetEntity="MemberBundle\Entity\User", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="UserBundle\Entity\User", mappedBy="team")
      */
     private $user;
 
@@ -202,5 +202,38 @@ class Team
     public function getMembers()
     {
         return $this->members;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \UserBundle\Entity\User $user
+     * @return Team
+     */
+    public function addUser(\UserBundle\Entity\User $user)
+    {
+        $this->user[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \UserBundle\Entity\User $user
+     */
+    public function removeUser(\UserBundle\Entity\User $user)
+    {
+        $this->user->removeElement($user);
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
