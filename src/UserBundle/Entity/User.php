@@ -65,12 +65,6 @@ class User implements UserInterface, \Serializable
      */
     private $birthDate;
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pseudo", type="string", length=100)
-     */
-    private $pseudo;
-    /**
      * @var integer
      *
      * @ORM\OneToMany(targetEntity="ForumBundle\Entity\Post", mappedBy="user")
@@ -105,6 +99,7 @@ class User implements UserInterface, \Serializable
         $this->createdAt = new \DateTime();
         $this->userRoles = new ArrayCollection();
         $this->updatedAt = new \DateTime();
+        $this->salt = md5(time());
     }
 
     /**
@@ -313,29 +308,6 @@ class User implements UserInterface, \Serializable
     public function getBirthDate()
     {
         return $this->birthDate;
-    }
-
-    /**
-     * Set pseudo
-     *
-     * @param string $pseudo
-     * @return User
-     */
-    public function setPseudo($pseudo)
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
-
-    /**
-     * Get pseudo
-     *
-     * @return string 
-     */
-    public function getPseudo()
-    {
-        return $this->pseudo;
     }
 
     /**
