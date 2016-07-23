@@ -19,6 +19,9 @@
             <div id="logo">
                 <img src='{{ asset('Public/img/logo/logo.jpg') }}'/>
             </div>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_User') %}
+                <a href="{{path('logout')}}">Se deconnecter</a>
+            {% endif %}
             <div id='main'>
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_User') %}
               <div id="nav">

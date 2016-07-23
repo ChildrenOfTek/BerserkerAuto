@@ -34,4 +34,6 @@ user:
 userBundle_admin:
     path: /admin
     defaults: { _controller: UserBundle:Admin:index}
+logout:
+    path: /logout
 
