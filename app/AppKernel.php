@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new ForumBundle\ForumBundle(),
             new ArticleBundle\ArticleBundle(),
             new ImageBundle\ImageBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
