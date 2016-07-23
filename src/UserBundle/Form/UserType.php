@@ -25,7 +25,7 @@ class UserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('birthDate', 'birthday',array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
-            ->add('userRoles',EntityType::class,array('class'=>'UserBundle:Role','property'=>'name'))
+            ->add('userRoles','hidden')
             ->add('team',EntityType::class,array('class'=>'TeamBundle:Team','property'=>'nom'))
         ;
     }

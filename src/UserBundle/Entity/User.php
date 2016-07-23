@@ -99,8 +99,6 @@ class User implements UserInterface, \Serializable
         $this->createdAt = new \DateTime();
         $this->userRoles = new ArrayCollection();
         $this->updatedAt = new \DateTime();
-        $this->salt = md5(time());
-        
     }
 
     /**
@@ -122,6 +120,7 @@ class User implements UserInterface, \Serializable
     {
         return $this->userRoles;
     }
+
     /**
      * Gets the user password.
      *

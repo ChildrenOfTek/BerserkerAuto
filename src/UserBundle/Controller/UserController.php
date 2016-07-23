@@ -10,9 +10,6 @@ use UserBundle\Entity\User;
 use UserBundle\Entity\Role;
 use UserBundle\Form\UserType;
 
-# il nous faut ce namespace pour la gestion du cryptage du mot de passe
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
-
 /**
  * User controller.
  *
@@ -45,14 +42,20 @@ class UserController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em=$this->getDoctrine()->getManager();
+        $repo=$em->getRepository("UserBundle:Role");
+        $role= new Role();
+        $role=$repo->findOneBy(array('name'=>'ROLE_USER'));
+        
         $user = new User();
         $form = $this->createForm('UserBundle\Form\UserType', $user);
         $form->handleRequest($request);
-
+       
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();     
-        $em->persist($user);
-        $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $user->setRoles(array($role));
+            $em->persist($user);
+            $em->flush();
 
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
