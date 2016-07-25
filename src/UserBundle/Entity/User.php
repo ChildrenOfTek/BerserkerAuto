@@ -41,9 +41,9 @@ class User implements UserInterface, \Serializable
     protected $salt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Role")
+     * @ORM\ManyToMany(targetEntity="Role", cascade={"remove", "persist"}))
      * @ORM\JoinTable(name="user_role",
-     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id",onDelete="CASCADE")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
      *)
      */
