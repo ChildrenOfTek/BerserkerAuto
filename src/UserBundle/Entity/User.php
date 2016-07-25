@@ -92,7 +92,7 @@ class User implements UserInterface, \Serializable
      */
     private $news;
     /**
-     * @ORM\ManyToOne(targetEntity="TeamBundle\Entity\Team", inversedBy="user")
+     * @ORM\ManyToOne(targetEntity="TeamBundle\Entity\Team", inversedBy="users")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      */
     private $team;
