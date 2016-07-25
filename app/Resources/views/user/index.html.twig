@@ -1,31 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block section %}
     <h1>User list</h1>
 
     <table>
         <thead>
             <tr>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>Id</th>
-                <th>Login</th>
-                <th>Password</th>
+                {% endif %}
+                <th>Pseudonyme</th>
+                <th>Mot de passe</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>Salt</th>
+                {% endif %}
+                
                 <th>Nom</th>
                 <th>Prenom</th>
-                <th>Birthdate</th>
+                <th>Date de naissance</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
+                {% if is_granted('ROLE_ADMIN') %}
                 <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                {% endif %}
+                
                 <td>{{ user.login }}</td>
                 <td>{{ user.password }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
                 <td>{{ user.salt }}</td>
+                    {% endif %}
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
-                <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if user.birthDate %}{{ user.birthDate|date('d-m-Y') }}{% endif %}</td>
+                
                 <td>
                     <ul>
                         <li>
@@ -36,6 +49,7 @@
                         </li>
                     </ul>
                 </td>
+                
             </tr>
         {% endfor %}
         </tbody>
@@ -43,7 +57,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('user_new') }}">Create a new entry</a>
+            <a href="{{ path('user_new') }}">Ajouter un utilisateur</a>
         </li>
     </ul>
 {% endblock %}

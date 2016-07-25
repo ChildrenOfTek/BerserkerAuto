@@ -48,9 +48,11 @@ class UserController extends Controller
         
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository("UserBundle:Role");
+        $roles=[];
         $role= new Role();
         $role=$repo->findOneBy(array('name'=>'ROLE_USER'));
-        
+        $roles[]=$role;
+        //var_dump($roles);die();
         $user = new User();
         $form = $this->createForm('UserBundle\Form\UserType', $user);
         $form->handleRequest($request);
@@ -69,7 +71,7 @@ class UserController extends Controller
             // On applique le mot de passe à l'utilisateur
             $user->setPassword($password);
             
-            $user->addUserRole($role);
+            $user->addUserRole($roles);
             $em->persist($user);
             $em->flush();
 

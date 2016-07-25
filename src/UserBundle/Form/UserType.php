@@ -19,13 +19,18 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->setMethod('POST')
             ->add('login','text',array('label'=>'Nom d\'utilisateur'))
             ->add('password','password',array('label'=>'Mot de passe'))
             ->add('salt','hidden')
             ->add('nom')
             ->add('prenom')
             ->add('birthDate', 'birthday',array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
-            ->add('userRoles','hidden')
+            ->add('userRoles',EntityType::class, array(
+                'class'=>'UserBundle:Role',
+                'attr'  => array('display' => 'hidden'),
+                'property'=>'name'
+                ))
             ->add('team',EntityType::class,array('class'=>'TeamBundle:Team','property'=>'nom'))
         ;
     }

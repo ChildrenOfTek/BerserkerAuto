@@ -41,7 +41,7 @@ class User implements UserInterface, \Serializable
     protected $salt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Role", cascade={"remove", "persist"}))
+     * @ORM\ManyToMany(targetEntity="Role", cascade={"remove"}))
      * @ORM\JoinTable(name="user_role",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id",onDelete="CASCADE")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
@@ -100,7 +100,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        
+        $this->userRoles=[];
         $this->updatedAt = new \DateTime();
     }
 
