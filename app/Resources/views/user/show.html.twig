@@ -33,7 +33,10 @@
                 <th>Birthdate</th>
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
             </tr>
-            
+            <tr>
+                <th>Pseudo</th>
+                <td>{{ user.pseudo }}</td>
+            </tr>
         </tbody>
     </table>
 
