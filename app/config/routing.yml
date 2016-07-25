@@ -1,3 +1,7 @@
+team_team:
+    resource: "@TeamBundle/Controller/TeamController.php"
+    type:     annotation
+
 user_user:
     resource: "@UserBundle/Controller/UserController.php"
     type:     annotation

@@ -13,7 +13,6 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Birthdate</th>
-                <th>Pseudo</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,7 +26,6 @@
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ user.pseudo }}</td>
                 <td>
                     <ul>
                         <li>
