@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>Team list</h1>
+    <h1>Listes des équipes</h1>
 
     <table>
         <thead>
@@ -25,10 +25,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('team_show', { 'id': team.id }) }}">show</a>
+                            <a href="{{ path('team_show', { 'id': team.id }) }}">Voir</a>
                         </li>
                         <li>
-                            <a href="{{ path('team_edit', { 'id': team.id }) }}">edit</a>
+                            <a href="{{ path('team_edit', { 'id': team.id }) }}">Editer</a>
                         </li>
                     </ul>
                 </td>
@@ -45,7 +45,7 @@
     {% if is_granted('ROLE_ADMIN') %}
     <ul>
         <li>
-            <a href="{{ path('team_new') }}">Create a new entry</a>
+            <a href="{{ path('team_new') }}">Créer une nouvelle équipe</a>
         </li>
     </ul>
     {% endif %}        
