@@ -1,5 +1,4 @@
 <?php
-
 namespace WarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -23,17 +22,10 @@ class War
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="members", type="integer")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $members;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="opponents", type="integer", unique=true)
-     */
-    private $opponents;
+    private $users;
 
     /**
      * @var \DateTime
@@ -46,7 +38,7 @@ class War
     /**
      * Get id
      *
-     * @return int
+     * @return integer 
      */
     public function getId()
     {
@@ -54,58 +46,9 @@ class War
     }
 
     /**
-     * Set members
-     *
-     * @param integer $members
-     *
-     * @return War
-     */
-    public function setMembers($members)
-    {
-        $this->members = $members;
-
-        return $this;
-    }
-
-    /**
-     * Get members
-     *
-     * @return int
-     */
-    public function getMembers()
-    {
-        return $this->members;
-    }
-
-    /**
-     * Set opponents
-     *
-     * @param integer $opponents
-     *
-     * @return War
-     */
-    public function setOpponents($opponents)
-    {
-        $this->opponents = $opponents;
-
-        return $this;
-    }
-
-    /**
-     * Get opponents
-     *
-     * @return int
-     */
-    public function getOpponents()
-    {
-        return $this->opponents;
-    }
-
-    /**
      * Set dateDebut
      *
      * @param \DateTime $dateDebut
-     *
      * @return War
      */
     public function setDateDebut($dateDebut)
@@ -118,11 +61,33 @@ class War
     /**
      * Get dateDebut
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getDateDebut()
     {
         return $this->dateDebut;
     }
-}
 
+    /**
+     * Set users
+     *
+     * @param \UserBundle\Entity\User $users
+     * @return War
+     */
+    public function setUsers(\UserBundle\Entity\User $users = null)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * Get users
+     *
+     * @return \UserBundle\Entity\User 
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+}
