@@ -42,6 +42,8 @@ class TeamController extends Controller
      */
     public function newAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'êtes pas Admin !');
+
         $team = new Team();
         $form = $this->createForm('TeamBundle\Form\TeamType', $team);
         $form->handleRequest($request);
@@ -88,6 +90,7 @@ class TeamController extends Controller
      */
     public function editAction(Request $request, Team $team)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'êtes pas Admin !');
         $deleteForm = $this->createDeleteForm($team);
         $editForm = $this->createForm('TeamBundle\Form\TeamType', $team);
         $editForm->handleRequest($request);
@@ -115,6 +118,7 @@ class TeamController extends Controller
      */
     public function deleteAction(Request $request, Team $team)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'êtes pas Admin !');
         $form = $this->createDeleteForm($team);
         $form->handleRequest($request);
 

@@ -45,7 +45,7 @@ class UserController extends Controller
      */
     public function newAction(Request $request)
     {
-        
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'êtes pas Admin !');
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository("UserBundle:Role");
         $roles=[];
@@ -108,6 +108,7 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'êtes pas Admin !');
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('UserBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
@@ -135,6 +136,7 @@ class UserController extends Controller
      */
     public function deleteAction(Request $request, User $user)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Vous n\'êtes pas Admin !');
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
 
