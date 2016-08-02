@@ -6,22 +6,22 @@
     <table>
         <thead>
             <tr>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>Id</th>
+                <th>Actions</th>
+                {% endif %}
                 <th>Nom</th>
                 <th>Tag</th>
                 <th>Victoires</th>
                 <th>Defaites</th>
-                <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
         {% for team in teams %}
             <tr>
+                {% if is_granted('ROLE_ADMIN') %}
                 <td><a href="{{ path('team_show', { 'id': team.id }) }}">{{ team.id }}</a></td>
-                <td>{{ team.nom }}</td>
-                <td>{{ team.tag }}</td>
-                <td>{{ team.victoires }}</td>
-                <td>{{ team.defaites }}</td>
                 <td>
                     <ul>
                         <li>
@@ -32,14 +32,21 @@
                         </li>
                     </ul>
                 </td>
+                {% endif %}
+                <td><a href="{{ path('team_show', { 'id': team.id }) }}">{{ team.nom }}</a></td>
+                <td>{{ team.tag }}</td>
+                <td>{{ team.victoires }}</td>
+                <td>{{ team.defaites }}</td>
+                
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
+    {% if is_granted('ROLE_ADMIN') %}
     <ul>
         <li>
             <a href="{{ path('team_new') }}">Create a new entry</a>
         </li>
     </ul>
+    {% endif %}        
 {% endblock %}

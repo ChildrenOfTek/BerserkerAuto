@@ -1,37 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Team</h1>
+{% block section %}
+    {{ dump(members)}}
+    <div class="container">
+        <div>
+    <h1>Equipe {{team.nom }}</h1>
 
     <table>
         <tbody>
+            {% if is_granted('ROLE_ADMIN') %}
             <tr>
                 <th>Id</th>
                 <td>{{ team.id }}</td>
             </tr>
-            <tr>
+            {% endif %}
                 <th>Nom</th>
-                <td>{{ team.nom }}</td>
-            </tr>
-            <tr>
                 <th>Tag</th>
-                <td>{{ team.tag }}</td>
-            </tr>
-            <tr>
                 <th>Victoires</th>
-                <td>{{ team.victoires }}</td>
+                <th>Defaites</th>
             </tr>
             <tr>
-                <th>Defaites</th>
+                <td>{{ team.nom }}</td>
+                <td>{{ team.tag }}</td>
+                <td>{{ team.victoires }}</td>
                 <td>{{ team.defaites }}</td>
             </tr>
         </tbody>
     </table>
-
+    </div>
+    <div style="margin-left: 50px;">
+        <h1>Membres</h1>
+        <table>
+        <tbody>
+            {% if is_granted('ROLE_ADMIN') %}
+            <tr>
+                <th>Id</th>
+                <th>Mot de pass</th>
+                <td>{{ member.id }}</td>
+                <td>{{ member.password }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th>Pseudo</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+            </tr>
+            
+            {% for member in members%}
+            
+            <tr>
+                <td>{{ member.login }}</td>
+                <td>{{ member.nom }}</td>
+                <td>{{ member.prenom }}</td>
+                <td>{{ member.birthDate|date('d-m-Y') }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    </div>
+    </div>
     <ul>
         <li>
-            <a href="{{ path('team_index') }}">Back to the list</a>
+            <a href="{{ path('team_index') }}">Retour à la liste des équipes</a>
         </li>
+        {% if is_granted('ROLE_ADMIN') %}
         <li>
             <a href="{{ path('team_edit', { 'id': team.id }) }}">Edit</a>
         </li>
@@ -40,5 +73,6 @@
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
+        {% endif %}
     </ul>
 {% endblock %}

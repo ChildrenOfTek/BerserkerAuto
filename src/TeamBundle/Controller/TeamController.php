@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use TeamBundle\Entity\Team;
 use TeamBundle\Form\TeamType;
+use UserBundle\Entity\User;
 
 /**
  * Team controller.
@@ -67,10 +68,14 @@ class TeamController extends Controller
      */
     public function showAction(Team $team)
     {
+        $em=$this->getDoctrine()->getManager();
+        $repo=$em->getRepository('UserBundle:User');
+        $members=$repo->findBy(array('team'=>$team->getId()));
         $deleteForm = $this->createDeleteForm($team);
 
         return $this->render('team/show.html.twig', array(
             'team' => $team,
+            'members' => $members,
             'delete_form' => $deleteForm->createView(),
         ));
     }

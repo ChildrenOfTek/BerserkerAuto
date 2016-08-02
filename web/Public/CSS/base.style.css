@@ -43,4 +43,9 @@ body
 {
     margin-left:50px;
 }
+.container
+{
+    display:flex;
+    flex-flow:row nowrap;
+}
 
