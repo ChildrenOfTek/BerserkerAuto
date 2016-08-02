@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+    <h1>Liste des wars</h1>
+
+    <table>
+        <thead>
+            <tr>
+            {% if is_granted('ROLE_ADMIN') %}
+                <th>Id</th>
+                <th>Actions</th>
+            {% endif %}
+                <th>Nom</th>
+                <th>Date de debut</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for war in wars %}
+            <tr>
+                <td><a href="{{ path('war_show', { 'id': war.id }) }}">{{ war.nom }}</a></td>
+                <td>{% if war.dateDebut %}{{ war.dateDebut|date('Y-m-d') }}{% endif %}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('war_show', { 'id': war.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('war_edit', { 'id': war.id }) }}">Editer</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('war_new') }}">Créer une nouvelle War</a>
+                        </li>
+                    </ul>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,3 +1,11 @@
+war_war:
+    resource: "@WarBundle/Controller/WarController.php"
+    type:     annotation
+
+war_war:
+    resource: "@WarBundle/Controller/WarController.php"
+    type:     annotation
+
 team_team:
     resource: "@TeamBundle/Controller/TeamController.php"
     type:     annotation

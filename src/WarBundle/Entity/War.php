@@ -19,6 +19,13 @@ class War
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string")
+     */
+    private $nom;
 
     /**
      * @var int
@@ -30,7 +37,7 @@ class War
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebut", type="date")
+     * @ORM\Column(name="dateDebut", type="datetime")
      */
     private $dateDebut;
 
@@ -43,6 +50,29 @@ class War
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return War
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
     }
 
     /**
