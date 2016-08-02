@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>User list</h1>
-
+    <h1>Liste des membres inscrits</h1>
+{{dump(users)}}
     <table>
         <thead>
             <tr>
@@ -20,6 +20,7 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Date de naissance</th>
+                <th>Equipe</th>
                 {% if is_granted('ROLE_ADMIN') %}
                 <th>Actions</th>
                 {% endif %}
@@ -42,6 +43,8 @@
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{% if user.birthDate %}{{ user.birthDate|date('d-m-Y') }}{% endif %}</td>
+                <td><a href="{{path('team_show',{'id':user.team.id})}}">{{ user.team.nom }}</a></td>
+                
                 {% if is_granted('ROLE_ADMIN') %}
                 <td>
                     <ul>
@@ -51,6 +54,9 @@
                         <li>
                             <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
                         </li>
+                        <li>
+                             <a href="{{ path('user_new') }}">Ajouter un utilisateur</a>
+                        </li>
                     </ul>
                 </td>
                 {% endif %}
@@ -58,10 +64,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('user_new') }}">Ajouter un utilisateur</a>
-        </li>
-    </ul>
 {% endblock %}
