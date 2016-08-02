@@ -100,7 +100,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->userRoles=[];
+        
         $this->updatedAt = new \DateTime();
     }
 

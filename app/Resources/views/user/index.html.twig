@@ -10,7 +10,9 @@
                 <th>Id</th>
                 {% endif %}
                 <th>Pseudonyme</th>
+                {% if is_granted('ROLE_ADMIN') %}
                 <th>Mot de passe</th>
+                {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
                 <th>Salt</th>
                 {% endif %}
@@ -31,14 +33,16 @@
                 {% endif %}
                 
                 <td>{{ user.login }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
                 <td>{{ user.password }}</td>
+                {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
                 <td>{{ user.salt }}</td>
                     {% endif %}
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{% if user.birthDate %}{{ user.birthDate|date('d-m-Y') }}{% endif %}</td>
-                
+                {% if is_granted('ROLE_ADMIN') %}
                 <td>
                     <ul>
                         <li>
@@ -49,7 +53,7 @@
                         </li>
                     </ul>
                 </td>
-                
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>

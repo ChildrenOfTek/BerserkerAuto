@@ -17,8 +17,8 @@ class TeamType extends AbstractType
         $builder
             ->add('nom')
             ->add('tag')
-            ->add('victoires')
-            ->add('defaites')
+            ->add('victoires','hidden',array('empty_data'=>0))
+            ->add('defaites','hidden',array('empty_data'=>0))
         ;
     }
     
